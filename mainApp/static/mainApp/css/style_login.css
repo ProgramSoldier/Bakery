@@ -1,0 +1,23 @@
+
+
+.content-conteiner{
+    display: flex;
+    justify-content: center;
+}
+
+form .form-error{
+    max-width: 300px;
+    color: rgb(255, 0, 0);
+}
+
+form button{
+    max-width: 300px;
+}
+
+.form-label{
+    color: rgb(255, 0, 0);
+}
+
+#id_username{
+    width: 150px;
+}

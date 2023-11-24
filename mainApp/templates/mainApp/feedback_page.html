@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'mainApp/css/style_feedback.css' %}">
+{% endblock css %}
+
+{% block content-conteiner %}
+    <div class="feedbacks">
+        {% for feedback in models%}
+            <div class="feedback">
+                <p class="user-name">{{ feedback.user}}</p>
+                <p class="content">{{ feedback.content }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    {% if request.user.is_authenticated %}
+        <div class="form">
+            <form method="post" class="add-feedback">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <p class="title-form">Оставьте отзыв, чтобы мы могли улучшать своё качество</p>
+                {{ form.content }}<br>
+                {{ form.non_field_errors }}
+                <button type="submit">Оставить отзыв</button>
+            </form>
+        </div>
+    {% else %}
+        <p class="is-auth"> Отзыв может оставить только авторизированный пользователь </p>
+    {% endif %}
+{% endblock %}

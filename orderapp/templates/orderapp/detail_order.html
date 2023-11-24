@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+
+{% endblock css %}
+
+{% block content-conteiner %}
+    <form method="post" class="order" action="#">
+      {% csrf_token %}
+      <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Изображение</th>
+          <th>Название</th>
+          <th>Количество</th>
+          <th>Цена за штуку</th>
+          <th>Общая цена за продукт</th>
+         </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+           <tr>
+             <td><input type="checkbox" name="for_order" checked/></td>
+             <input type="hidden" name="product_id" value="{{item.product.pk}}"/>
+             <td><img src="{{ item.product.img.url }}" /></td>
+             <td><p>{{item.product.title}}</p></td>
+             <td><p>{{item.quantity}}</p></td>
+             <td><p>{{item.product.price}} ₽</p></td>
+             <td><p>{% widthratio item.product.price 1 item.quantity %} ₽</p></td>
+          </tr>
+        {% endfor%}
+         <tr>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td><p>Общая: </p></td>
+           <td><p>{{all_price}} ₽</p></td>
+        </tr>
+        <tr>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td><p><button type="submit">Фотормить заказ</button></p></td>
+        </tr>
+        </tbody>
+      </table>
+    </form>
+{% endblock %}

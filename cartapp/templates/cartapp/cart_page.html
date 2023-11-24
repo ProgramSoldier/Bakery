@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cartapp/css/style_cart.css' %}">
+{% endblock css %}
+
+{% block content-conteiner %}
+{% if request.user.is_authenticated %}
+  {% if items %}
+      <form method="post" id="add-order" class="cart" action="{% url 'add_order' %}"> {% csrf_token %}</form>
+      <form method="post" id="update-item" class="cart" action="{% url 'update_cart' %}">{% csrf_token %}  </form>
+      <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Изображение</th>
+          <th>Название</th>
+          <th>Количество</th>
+          <th>Цена за штуку</th>
+          <th>Общая цена за продукт</th>
+         </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+           <tr>
+             <td><input type="checkbox" name="for-order" form="add-order" checked/></td>
+             <input type="hidden" name="product_id" form="add-order" value="{{item.product.pk}}" checked/>
+             <td><img src="{{ item.product.img.url }}" /></td>
+             <td><p>{{item.product.title}}</p></td>
+             <td>
+                 <button type="submit" form="update-item" name="btn" value="add_{{item.product.pk}}">+1</button>
+                 <p>{{item.quantity}}</p>
+                 <button type="submit" form="update-item" name="btn" value="remove_{{item.product.pk}}">-1</button>
+             </td>
+             <td><p>{{item.product.price}} ₽</p></td>
+             <td><p>{% widthratio item.product.price 1 item.quantity %} ₽</p></td>
+          </tr>
+        {% endfor%}
+         <tr>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td><p>Общая: </p></td>
+           <td><p>{{all_price}} ₽</p></td>
+        </tr>
+        <tr>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td><p><button type="submit" form="add-order">Подтвердить заказ</button></p></td>
+        </tr>
+        </tbody>
+      </table>
+ {% else %}
+  <p><H3>Ваша корзина пуста</H3></p>
+ {% endif %}
+{% else %}
+    <p><H3>Вы не вошли в систему</H3></p>
+{% endif %}
+{% endblock %}

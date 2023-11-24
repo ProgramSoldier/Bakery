@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'products/css/style_product.css' %}">
+{% endblock css %}
+
+
+{% block content-conteiner %}
+      {% if products %}
+         <form method="post" id="add-item" action="{% url 'update_cart'%}">{% csrf_token %}</form>
+        {% for product in products %}
+            <div class = "product-conteiner">
+                <h4>{{product.title}}</h4>
+                <img src = "{{product.img.url}}"/>
+                <div class = "content">
+                    <p >{{product.description}}</p>
+                </div>
+                <div class="price-and-button">
+                  <p>Цена:{{product.price}}</p>
+                  {% if request.user.is_authenticated %}
+                         <button type="submit" form="add-item" name="btn" value="add_{{product.pk}}">Добавить в корзину</button>
+                  {% endif %}
+                </div>
+
+            </div>
+        {% endfor %}
+      {% else %}
+          <p> Товаров пока нет в категории </p>
+      {% endif %}
+{% endblock %}

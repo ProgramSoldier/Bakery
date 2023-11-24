@@ -1,0 +1,139 @@
+body{
+    /*min-width:  500px;*/
+}
+
+p{
+    color: rgb(255, 248, 242);
+}
+
+/*Сообщение о том, что пользователь уже вошёл или не вошёл в аккаунт*/
+/*--------------------------------------*/
+.is-auth{
+      width: 70%;
+      background-color: rgb(181, 81, 51);
+      border: 3px solid rgb(150, 57, 29);
+      text-align: center;
+      font-size: 32px;
+      max-height: 70px;
+}
+
+
+
+/*Общее для меню*/
+/*--------------------------------------*/
+
+.menu {
+     background-color: rgb(181, 81, 51);
+}
+.menu a{
+    color: rgb(255, 248, 242);
+    height: 24px;
+    text-decoration: none;
+    background-color: rgb(181, 81, 51);
+    padding: 5px 5px 10px; /*top (left, right) down*/
+    margin: 17px 5px; /*(top, down) (left, right) */
+}
+
+.menu a:hover{
+    background: rgb(150, 57, 29);
+}
+/*Верхнее меню*/
+/*--------------------------------------*/
+.up-menu{
+    display: flex;
+    justify-content: space-between;
+
+}
+.up-menu nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 80px;
+}
+
+.login{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 80px;
+}
+.up-menu a{
+    font-size: 24px;
+}
+
+
+/*Нижнее меню*/
+/*--------------------------------------*/
+.down-menu{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.down-menu nav{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 250px;
+}
+
+.down-menu .contacts{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+}
+
+.down-menu .contacts p{
+    color: rgb(255, 255, 255);
+}
+
+/*Основной контейнер*/
+/*--------------------------------------*/
+.main-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-image: url(../background_image/fon_mainpage.jpg);
+
+
+.background-image{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.background-image img{
+    width:30px;
+    height:30px;
+}
+
+.content-conteiner{
+    background: rgb(252,249,240);
+    min-height: 900px;
+}
+
+@media screen and (width > 1050px){
+    .content-conteiner{
+        width: 1050px
+    }
+}
+
+@media screen and (width > 710px) and (width < 1050px){
+    .content-conteiner{
+        width: 710px
+    }
+}
+
+@media screen and (width < 710px){
+    .content_conteiner{
+        justify-content: center;
+        width: 70%;
+    }
+    .content-conteiner a{
+        margin: 30px 0;
+    }
+}
+
+
+
